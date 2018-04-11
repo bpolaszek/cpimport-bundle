@@ -1,0 +1,34 @@
+parameters:
+    env(POLL_EVERY_MS): 1000
+
+services:
+
+    BenTools\CpImportBundle\Watcher\RegularPollWatcher:
+        class: BenTools\CpImportBundle\Watcher\RegularPollWatcher
+        arguments: [ '%env(POLL_EVERY_MS)%' ]
+
+    BenTools\CpImportBundle\Watcher\DirectoryWatcherInterface:
+        alias: BenTools\CpImportBundle\Watcher\RegularPollWatcher
+
+    BenTools\CpImportBundle\CpImportFileWatcher:
+        class: BenTools\CpImportBundle\CpImportFileWatcher
+        arguments:
+            - '@BenTools\CpImportBundle\Watcher\DirectoryWatcherInterface'
+            - '@BenTools\CpImportBundle\CpImportProcessBuilder'
+
+    BenTools\CpImportBundle\Command\CpImportRunCommand:
+        class: BenTools\CpImportBundle\Command\CpImportRunCommand
+        arguments:
+            - '@BenTools\CpImportBundle\CpImportProcessBuilder'
+        tags:
+            - { name: console.command }
+
+    BenTools\CpImportBundle\Command\CpImportWatchCommand:
+        class: BenTools\CpImportBundle\Command\CpImportWatchCommand
+        arguments:
+            - '@BenTools\CpImportBundle\CpImportFileWatcher'
+        tags:
+            - { name: console.command }
+
+    BenTools\CpImportBundle\CpImportProcessBuilder:
+        class: BenTools\CpImportBundle\CpImportProcessBuilder
