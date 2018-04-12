@@ -52,7 +52,7 @@ class CpImportExtension extends Extension
             if (!is_dir($directory)) {
                 throw new \LogicException(sprintf('%s is not a valid directory.', $directory));
             }
-            $definition->addMethodCall('registerImportAction', [$directory, $params['database'], $params['table'], $params['options']]);
+            $definition->addMethodCall('registerImportAction', [$directory, $params['database'], $params['table'], $params['options'] ?? []]);
         }
     }
 
