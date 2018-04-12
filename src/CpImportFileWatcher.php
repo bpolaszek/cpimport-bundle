@@ -33,9 +33,11 @@ class CpImportFileWatcher
             new DirectoryAction(
                 function (string $directory, string $filename) use ($db, $table, $options) {
                     $filepath = sprintf('%s/%s', $directory, $filename);
-                    $this->processBuilder->createProcess($filepath, $db, $table, $options)
-                        ->run($options['callback'] ?? null);
-                    unlink($filepath);
+                    if ('csv' === pathinfo($filepath, PATHINFO_EXTENSION)) {
+                        $this->processBuilder->createProcess($filepath, $db, $table, $options)
+                            ->run($options['callback'] ?? null);
+                        unlink($filepath);
+                    }
                 }
             )
         );
