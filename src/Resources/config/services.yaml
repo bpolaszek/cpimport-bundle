@@ -27,6 +27,7 @@ services:
         class: BenTools\CpImportBundle\Command\CpImportWatchCommand
         arguments:
             - '@BenTools\CpImportBundle\CpImportFileWatcher'
+            - '@Symfony\Component\Lock\Factory'
         tags:
             - { name: console.command }
 
