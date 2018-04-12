@@ -38,6 +38,7 @@ class CpImportWatchCommand extends Command
     protected function configure()
     {
         $this->addOption('unlock', null, InputOption::VALUE_NONE, 'Unlocks the command if lock.');
+        $this->addOption('process-existing-files', null, InputOption::VALUE_NONE, 'Process existing files.');
     }
 
     /**
@@ -54,8 +55,10 @@ class CpImportWatchCommand extends Command
             return;
         }
 
+        $processExistingFiles = $input->getOption('process-existing-files');
+
         if ($lock->acquire()) {
-            $this->watcher->wait();
+            $this->watcher->wait($processExistingFiles);
             $lock->release();
         } else {
             $output->error(sprintf('%s is already running.', $this->getName()));

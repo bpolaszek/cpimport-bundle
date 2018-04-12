@@ -5,6 +5,8 @@ namespace BenTools\CpImportBundle\Watcher;
 interface DirectoryWatcherInterface
 {
     /**
+     * Configure this directory to be watched.
+     *
      * @param string $directory
      * @return WatchedDirectoryInterface
      */
@@ -12,6 +14,8 @@ interface DirectoryWatcherInterface
 
     /**
      * Watch for file modifications. (blocking)
+     *
+     * @param bool $processExistingFiles
      */
-    public function wait(): void;
+    public function wait(bool $processExistingFiles = false): void;
 }

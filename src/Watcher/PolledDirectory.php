@@ -37,6 +37,11 @@ class PolledDirectory implements WatchedDirectoryInterface
         $this->directory = $directory;
         $this->synchronize(false);
     }
+    public function reset(): void
+    {
+        $this->files = [];
+        $this->newFiles = [];
+    }
 
     /**
      * @param bool $populateNewFiles

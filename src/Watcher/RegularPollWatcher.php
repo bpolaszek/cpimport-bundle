@@ -36,15 +36,21 @@ class RegularPollWatcher implements DirectoryWatcherInterface
     /**
      * @inheritDoc
      */
-    public function wait(): void
+    public function wait(bool $processExistingFiles = false): void
     {
+        $isFirstIteration = true;
         while (true) {
             foreach ($this->watchedDirectories as $watchedDirectory) {
+                if (true === $isFirstIteration && true === $processExistingFiles) {
+                    $watchedDirectory->reset();
+                }
+
                 $watchedDirectory->synchronize(true);
                 $watchedDirectory->notify();
             }
 
             usleep($this->pollEveryMs * 1000);
+            $isFirstIteration = false;
         }
     }
 }

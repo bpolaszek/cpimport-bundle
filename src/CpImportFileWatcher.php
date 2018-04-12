@@ -45,9 +45,11 @@ class CpImportFileWatcher
 
     /**
      * Wait for files.
+     *
+     * @param bool $processExistingFiles
      */
-    public function wait(): void
+    public function wait(bool $processExistingFiles = false): void
     {
-        $this->watcher->wait();
+        $this->watcher->wait($processExistingFiles);
     }
 }
