@@ -25,6 +25,7 @@ class Configuration implements ConfigurationInterface
                         ->children()
                         ->scalarNode('delimiter')->end()
                         ->scalarNode('enclosure')->end()
+                        ->scalarNode('timeout')->end()
                         ->end()
                     ->end()
                 ->end()

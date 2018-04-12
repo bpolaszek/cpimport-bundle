@@ -49,6 +49,6 @@ class CpImportProcessBuilder
         $command[] = $table;
         $command[] = $filepath;
 
-        return new Process($command);
+        return new Process($command, null, null, null, $options['timeout'] ?? null);
     }
 }

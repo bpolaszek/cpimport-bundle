@@ -26,6 +26,7 @@ cpimport:
             options:
                 delimiter: ','
                 enclosure: '"'
+                timeout: 60
 ```
 
 ## Usage
