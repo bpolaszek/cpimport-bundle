@@ -6,6 +6,9 @@ It has the drawback of extremely slow write operations, but comes with `cpimport
 
 This Symfony bundle enables a file watcher that will look into a directory, pick up new CSV files when they come, run `cpimport` and delete them.
 
+> [!IMPORTANT]  
+> This repository is no longer maintained and may be removed in a near future. You may consider creating a fork if you still require it.
+
 ## Installation
 
 > composer require bentools/cpimport-bundle:1.0.x-dev
